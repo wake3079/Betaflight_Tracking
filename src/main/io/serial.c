@@ -157,6 +157,13 @@ void pgResetFn_serialConfig(serialConfig_t *serialConfig)
     }
 #endif
 
+#if defined(USE_TARGET_TRACK) && defined(TRACKING_UART)
+    serialPortConfig_t *trackingUartConfig = serialFindPortConfigurationMutable(TRACKING_UART);
+    if (trackingUartConfig) {
+        trackingUartConfig->functionMask = FUNCTION_TRACKING;
+    }
+#endif
+
 #ifdef SERIALRX_UART
     serialPortConfig_t *serialRxUartConfig = serialFindPortConfigurationMutable(SERIALRX_UART);
     if (serialRxUartConfig) {

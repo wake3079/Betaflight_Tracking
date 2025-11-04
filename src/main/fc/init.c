@@ -78,6 +78,7 @@
 #include "drivers/timer.h"
 #include "drivers/transponder_ir.h"
 #include "drivers/usb_io.h"
+#include "drivers/targetTrack/TrackingBoard.h"
 #ifdef USE_USB_MSC
 #include "drivers/usb_msc.h"
 #endif
@@ -997,6 +998,10 @@ void init(void)
 #if defined(USE_SPI) && defined(USE_SPI_DMA_ENABLE_LATE) && !defined(USE_SPI_DMA_ENABLE_EARLY)
     // Attempt to enable DMA on all SPI busses
     spiInitBusDMA();
+#endif
+
+#if defined(USE_TARGET_TRACK)
+    TrackingBoardInit();
 #endif
 
     debugInit();

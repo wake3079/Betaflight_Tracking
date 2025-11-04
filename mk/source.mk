@@ -212,7 +212,8 @@ COMMON_SRC += \
             $(addprefix drivers/compass/,$(notdir $(wildcard $(SRC_DIR)/drivers/compass/*.c))) \
             drivers/max7456.c \
             drivers/vtx_rtc6705.c \
-            drivers/vtx_rtc6705_soft_spi.c
+            drivers/vtx_rtc6705_soft_spi.c \
+            drivers/targetTrack/TrackingBoard.c
 
 ifneq ($(GYRO_DEFINE),)
 

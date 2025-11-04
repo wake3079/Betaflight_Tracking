@@ -45,6 +45,7 @@
 #include "drivers/transponder_ir.h"
 #include "drivers/usb_io.h"
 #include "drivers/vtx_common.h"
+#include "drivers/targetTrack/TrackingBoard.h"
 
 #include "config/config.h"
 #include "fc/core.h"
@@ -453,7 +454,9 @@ task_attribute_t task_attributes[TASK_COUNT] = {
 #ifdef USE_RC_STATS
     [TASK_RC_STATS] = DEFINE_TASK("RC_STATS", NULL, NULL, rcStatsUpdate, TASK_PERIOD_HZ(100), TASK_PRIORITY_LOW),
 #endif
-
+#ifdef USE_TARGET_TRACK
+    [TASK_TRACK] = DEFINE_TASK("TRACK_BOARD", NULL, NULL, TrackingBoardUpdate, TASK_PERIOD_HZ(TASK_TRACKING_RATE), TASK_PRIORITY_MEDIUM),
+#endif
 };
 
 task_t *getTask(unsigned taskId)
@@ -628,5 +631,9 @@ void tasksInit(void)
 
 #ifdef USE_RC_STATS
     setTaskEnabled(TASK_RC_STATS, true);
+#endif
+
+#ifdef USE_TARGET_TRACK
+    setTaskEnabled(TASK_TRACK, true);
 #endif
 }
