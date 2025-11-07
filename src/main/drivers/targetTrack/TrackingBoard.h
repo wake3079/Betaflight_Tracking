@@ -81,6 +81,11 @@ typedef struct
     uint16_t target_center_y; 
     uint16_t target_width;   
     uint16_t target_height;   
+    uint16_t track_area_size_width;
+    uint16_t track_area_size_height;
+    uint16_t max_target_width;
+    uint16_t max_target_height;
+    uint16_t target_confidence_threshold;   
     uint8_t reserve_1[2];
     uint8_t primary_sensor_chan;
     uint8_t primary_sensor_enhan;
@@ -125,6 +130,10 @@ int Tracking_cmd_send_pre_tracking(uint16_t azimuth_coordinate, uint16_t pitch_c
 int Tracking_cmd_send_cmd_self_check(void);
 
 int Tracking_cmd_send_priority_mode(uint16_t status, uint16_t type, uint16_t priority);
+
+int Tracking_cmd_send_adsorption_area_size(uint16_t area_width, uint16_t area_height);
+
+int Tracking_cmd_send_adsorption_param(uint16_t template_width, uint16_t template_height, uint16_t threshold);
 
 int Tracking_cmd_send_image_channle(uint16_t ch, uint16_t status);
 

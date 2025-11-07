@@ -293,6 +293,29 @@ int Tracking_cmd_send_priority_mode(uint16_t status, uint16_t type, uint16_t pri
     return Tracking_cmd_send(send);
 }
 
+int Tracking_cmd_send_adsorption_area_size(uint16_t area_width, uint16_t area_height)
+{
+    Tracking_board_packet_send send;
+    memset(&send, 0, sizeof(send));
+    send.head.c2_id = 0x41;
+    send.head.c2_cmd1 = 0x31;
+    memcpy(send.head.c2_params, (uint8_t *)&area_width, sizeof(area_width));
+    memcpy(&send.head.c2_params[2], (uint8_t *)&area_height, sizeof(area_height));
+    return Tracking_cmd_send(send);
+}
+
+int Tracking_cmd_send_adsorption_param(uint16_t template_width, uint16_t template_height, uint16_t threshold)
+{
+    Tracking_board_packet_send send;
+    memset(&send, 0, sizeof(send));
+    send.head.c2_id = 0x41;
+    send.head.c2_cmd1 = 0x32;
+    memcpy(send.head.c2_params, (uint8_t *)&template_width, sizeof(template_width));
+    memcpy(&send.head.c2_params[2], (uint8_t *)&template_height, sizeof(template_height));
+    memcpy(&send.head.c2_params[4], (uint8_t *)&threshold, sizeof(threshold));
+    return Tracking_cmd_send(send);
+}
+
 int Tracking_cmd_send_image_channle(uint16_t ch, uint16_t status)
 {
     Tracking_board_packet_send send;
